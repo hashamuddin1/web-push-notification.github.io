@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+</head>
+
+<body>
+    <!-- Through the power of service workers, notifications can be delivered to a device even when your application is not in focus.  -->
+    <button onclick="subscribe()">Click Here</button>
+
+    <script type="text/javascript">
+        addEventListener('load', async() => {
+            let service_worker = await navigator.serviceWorker.register('./sw.js')
+            console.log(service_worker)
+        })
+        async function subscribe() {
+            let sw = await navigator.serviceWorker.ready;
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'BEhM9Luq_Gw0mVGOZM3JvEo_8RmxoHAxKFJ7G_bppIv9-D8ZihkkEowx_kA3htj8pMTtf1Dex-m8rduT1m5YYr4'
+            })
+            console.log(JSON.stringify(push))
+        }
+    </script>
+</body>
+
+</html>
